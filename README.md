@@ -1,2 +1,44 @@
 # lidarFilters
 Reduce Noise from Lidar Sensor Data
+
+
+LIDAR Filter
+========
+
+LIDAR Filter will provide you with useful functions to reduce noise in the data coming from a LIDAR sensor
+attached to your robot. LIDAR filter provides two filters entitled as range and temporal median.
+
+To use this software:
+
+    To use range filter, you should define an list of sensor measurements.
+    Example:
+    
+    // Range filter
+    minimum, maximum = 0.03, 5 
+    sensorMeasurementsRangeFilter = [[0., 1., 2., 1., 3.], [1., 5., 7., 1., 3.], [2., 3., 4., 1., 0.], [3., 3., 3., 1., 3.], [10., 2., 4., 0., 0.]]
+    sensorMeasurementsRangeFilterOutput = rangeFilter(sensorMeasurements, minimum, maximum)
+
+    rangeFilter has the algorithm for scanning and updating the sensor data i.e filtering the data based on range values.
+
+    To use temporal median filter, you should define an list of sensor measurements and perform range filtering and define d previous scans.
+    Example:
+    d  = 4
+
+    temporalMedianFilterOp = list(tempMedianFilter(sensorMeasurementsRangeFilterOutput, d+1))
+	
+
+Tests
+--------
+Testing includes:
+	-- Empty scan
+	-- Problem sample 
+	-- Scans with very large values up to 1e30
+	-- Large number of measurements up to 1000
+	-- Large number of scans (1000) with large number of measurements (1000)
+	-- Update with 20 number of random scans each with 10 measurements
+
+
+	
+Testing Platform setup
+-----------------------
+   To run all testcases, simply run lidarFilters.py and testlidarFilters.py located inside the same directory.
